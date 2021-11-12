@@ -18,6 +18,10 @@
     <string name="costPlaceHolder">$53.45</string>
     <string name="stringBookButton">Book</string>
 
+    <!--  Sort Popup  -->
+    <string name="sort"><u>Sort</u></string>
+    <string name="buttonCheapest">Cheapest</string>
+    <string name="buttonFastest">Fastest</string>
 
 
 </resources>

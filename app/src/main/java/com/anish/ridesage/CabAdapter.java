@@ -24,7 +24,6 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
     public CabAdapter(List<CabItem> movieList, CabItemClickListener listener){
         this.cabList = movieList;
         this.CabItemClickListener = listener;
-
     }
 
     @NonNull
@@ -54,7 +53,6 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
         public TextView cabType;
         public TextView maxSeats;
         public TextView pickupTime;
