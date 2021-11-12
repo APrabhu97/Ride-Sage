@@ -1,10 +1,6 @@
 package com.anish.ridesage;
-
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class CabItem implements Parcelable {
     private String provider;
