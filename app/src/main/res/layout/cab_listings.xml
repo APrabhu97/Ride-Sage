@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/cabListSource"
         android:layout_width="315dp"
         android:layout_height="41dp"
         android:layout_marginStart="52dp"
@@ -17,7 +17,7 @@
         android:text="@string/stringInput"/>
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/cabListDestination"
         android:layout_width="315dp"
         android:layout_height="41dp"
         android:layout_marginStart="52dp"
@@ -51,7 +51,58 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
+        <TextView
+            android:id="@+id/cabTypeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="12dp"
+            android:text="Provider"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/maxSeatsLabel"
+            android:layout_width="51dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="8dp"
+            android:text="Seats"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pickupTimeLabel"
+            android:layout_width="66dp"
+            android:layout_height="53dp"
+            android:layout_marginStart="252dp"
+            android:layout_marginTop="4dp"
+            android:text="Pickup Time"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/costLabel"
+            android:layout_width="57dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="8dp"
+            android:text="Cost"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"

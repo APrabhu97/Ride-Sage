@@ -77,7 +77,7 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
         @Override
         public void onClick(View v) {
             //opening the trailer of the movie on click of movie item
-            listener.onClick(cabItem.getProvider());
+            listener.onClick(cabItem);
         }
     }
 }
