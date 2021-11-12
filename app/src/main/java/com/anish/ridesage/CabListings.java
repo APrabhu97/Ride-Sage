@@ -1,9 +1,11 @@
 package com.anish.ridesage;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -12,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class CabListings extends AppCompatActivity {
@@ -33,9 +34,13 @@ public class CabListings extends AppCompatActivity {
     private Button buttonCheapest;
     private Button buttonFastest;
     private Button buttonQuitSortPopup;
+    private EditText source;
+    private  EditText destination;
 
-    CabItemClickListener listener = (url) -> {
-        Log.i("CabListings", "reached");
+    CabItemClickListener listener = (cabItem) -> {
+        Intent myIntent = new Intent(this, BookRideActivity.class);
+        myIntent.putExtra("cabItem", cabItem);
+        startActivity(myIntent);
     };
 
     @Override
@@ -43,10 +48,18 @@ public class CabListings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cab_listings);
 
+
         // Assign view elements
         cabListings = getCabListings();  // Placeholder Cab Listings
         buttonSort = findViewById(R.id.buttonSort);
         recyclerView = findViewById(R.id.recycler_view);
+        source = findViewById(R.id.cabListSource);
+        destination = findViewById(R.id.cabListDestination);
+
+        //handling intent
+        Intent i = getIntent();
+        source.setText(i.getStringExtra("source"));
+        destination.setText(i.getStringExtra("destination"));
 
         // Recycler View
         CabAdapter adapter = new CabAdapter(cabListings, listener);
