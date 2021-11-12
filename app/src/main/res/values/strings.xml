@@ -22,5 +22,10 @@
     <string name="welcomeScreenDescription">Find the Best Ride Today</string>
     <string name="beginButton">Begin</string>
 
+    <!--  Sort Popup  -->
+    <string name="sort"><u>Sort</u></string>
+    <string name="buttonCheapest">Cheapest</string>
+    <string name="buttonFastest">Fastest</string>
+
 
 </resources>
