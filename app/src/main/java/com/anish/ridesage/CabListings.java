@@ -2,6 +2,11 @@ package com.anish.ridesage;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +19,7 @@ import java.util.List;
 public class CabListings extends AppCompatActivity {
     List<CabItem> cabListings;
     RecyclerView recyclerView;
+//    Button sortButton;
 
     CabItemClickListener listener = (url) -> {
         Log.i("CabListings", "reached");
@@ -23,12 +29,35 @@ public class CabListings extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cab_listings);
+        Toast.makeText(this, "Works", Toast.LENGTH_LONG);
+
         cabListings = getCabListings();
         recyclerView = findViewById(R.id.recycler_view);
         CabAdapter adapter = new CabAdapter(cabListings, listener);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        Button sortButton = findViewById(R.id.sortb);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(CabListings.this, "Works", Toast.LENGTH_LONG);
+                PopupMenu popupMenu = new PopupMenu(CabListings.this, v);
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        return false;
+                    }
+                });
+
+            }
+        });
+
+
+
     }
 
     private List<CabItem> getCabListings(){
@@ -40,4 +69,6 @@ public class CabListings extends AppCompatActivity {
         list.add(new CabItem("Uber", 19, "10 min", "Premium", 5, R.drawable.uber));
         return list;
     }
+
+
 }
