@@ -1,9 +1,8 @@
 package com.anish.ridesage;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class CabItem {
+public class CabItem implements Parcelable {
     private String provider;
     private Integer cost;
     private String pickupTime;
@@ -19,6 +18,39 @@ public class CabItem {
         this.maxSeats = maxSeats;
         this.iconId = iconId;
     }
+
+    protected CabItem(Parcel in) {
+        provider = in.readString();
+        if (in.readByte() == 0) {
+            cost = null;
+        } else {
+            cost = in.readInt();
+        }
+        pickupTime = in.readString();
+        cabType = in.readString();
+        if (in.readByte() == 0) {
+            maxSeats = null;
+        } else {
+            maxSeats = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            iconId = null;
+        } else {
+            iconId = in.readInt();
+        }
+    }
+
+    public static final Creator<CabItem> CREATOR = new Creator<CabItem>() {
+        @Override
+        public CabItem createFromParcel(Parcel in) {
+            return new CabItem(in);
+        }
+
+        @Override
+        public CabItem[] newArray(int size) {
+            return new CabItem[size];
+        }
+    };
 
     public String getProvider() {
         return provider;
@@ -66,5 +98,22 @@ public class CabItem {
 
     public void setIconId(Integer iconId) {
         this.iconId = iconId;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(provider);
+        parcel.writeString(pickupTime);
+        parcel.writeInt(cost);
+        parcel.writeString(cabType);
+        parcel.writeInt(maxSeats);
+        parcel.writeInt(iconId);
+
+
     }
 }
