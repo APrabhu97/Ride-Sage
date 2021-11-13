@@ -37,6 +37,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="11dp"
             android:text="Filter"
+            android:onClick="onFilterClicked"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

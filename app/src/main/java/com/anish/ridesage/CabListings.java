@@ -6,8 +6,11 @@ import android.util.Log;
 
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.Toast;
 import android.view.View;
 import android.widget.Button;
@@ -25,8 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CabListings extends AppCompatActivity {
-    CabListings deleteLater = this;
-
     // Cab Listing List
     List<CabItem> cabListings;
 
@@ -35,20 +36,15 @@ public class CabListings extends AppCompatActivity {
     private AlertDialog dialog;
 
     // Main View Elements
-    private Button buttonSort;
     RecyclerView recyclerView;
-//    Button sortButton;
-
-    // Sort Popup View Elements
-//    private Button buttonCheapest;
-//    private Button buttonFastest;
-//    private Button buttonQuitSortPopup;
     private EditText source;
     private EditText destination;
 
     CabItemClickListener listener = (cabItem) -> {
         Intent myIntent = new Intent(this, BookRideActivity.class);
         myIntent.putExtra("cabItem", cabItem);
+        myIntent.putExtra("source", source.getText().toString());
+        myIntent.putExtra("destination", destination.getText().toString());
         startActivity(myIntent);
     };
 
@@ -56,10 +52,8 @@ public class CabListings extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cab_listings);
-        Toast.makeText(this, "Works", Toast.LENGTH_LONG);
 
         cabListings = getCabListings();
-
 
         // Assign view elements
         recyclerView = findViewById(R.id.recycler_view);
@@ -78,10 +72,9 @@ public class CabListings extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
     }
-    private List<CabItem> getCabListings() {
-        List<CabItem> list = new ArrayList<>();
 
-        // PROTOTYPE: Placeholder Cab Listings
+    public static List<CabItem> getCabListings() {
+        List<CabItem> list = new ArrayList<>();
         list.add(new CabItem("Uber", 13, "8 min", "Premium", 3, R.drawable.uber));
         list.add(new CabItem("Lyft", 15, "3 min", "Economy", 3, R.drawable.lyft));
         list.add(new CabItem("Lyft", 19, "6 min", "Premium", 3, R.drawable.lyft));
@@ -150,6 +143,11 @@ public class CabListings extends AppCompatActivity {
         list.add(new CabItem("Uber", 19, "10 min", "Premium", 5, R.drawable.uber));
         list.add(new CabItem("Uber", 19, "10 min", "Premium", 5, R.drawable.uber));
         return list;
+    }
+
+    public void onFilterClicked(View v){
+        FilterPopup filterPopup = new FilterPopup(recyclerView, listener, cabListings);
+        filterPopup.showPopupWindow(v);
     }
 
 }
