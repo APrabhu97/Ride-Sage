@@ -65,7 +65,7 @@ public class FilterPopup {
         Spinner dynamicSpinner = (Spinner) view.findViewById(R.id.platformSelect);
         String[] platforms = new String[]{"", "Uber", "Lyft"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                android.R.layout.simple_spinner_dropdown_item, platforms);
+                R.layout.item, platforms);
         dynamicSpinner.setAdapter(adapter);
         dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -108,7 +108,7 @@ public class FilterPopup {
         Spinner dynamicSpinner = (Spinner) view.findViewById(R.id.seatSelect);
         String[] platforms = new String[]{"", "3", "5"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                android.R.layout.simple_spinner_dropdown_item, platforms);
+                R.layout.item, platforms);
         dynamicSpinner.setAdapter(adapter);
         dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -130,7 +130,7 @@ public class FilterPopup {
         Spinner dynamicSpinner = (Spinner) view.findViewById(R.id.tierSelect);
         String[] platforms = new String[]{"", "Economy", "Premium"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                android.R.layout.simple_spinner_dropdown_item, platforms);
+                R.layout.item, platforms);
         dynamicSpinner.setAdapter(adapter);
         dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
