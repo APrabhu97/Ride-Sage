@@ -12,9 +12,12 @@
         android:layout_height="41dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="32dp"
+        android:backgroundTint="@color/lilac"
         android:ems="10"
+        android:hint="Current Location"
         android:inputType="textPersonName"
-        android:text="@string/stringInput"/>
+        android:text="@string/stringInput"
+        android:textColor="@color/white" />
 
     <EditText
         android:id="@+id/cabListDestination"
@@ -22,9 +25,12 @@
         android:layout_height="41dp"
         android:layout_marginStart="52dp"
         android:layout_marginTop="12dp"
+        android:backgroundTint="@color/lilac"
         android:ems="10"
+        android:hint="Destination"
         android:inputType="textPersonName"
-        android:text="@string/stringOutput" />
+        android:text="@string/stringOutput"
+        android:textColor="@color/white" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -34,10 +40,10 @@
             android:id="@+id/button5"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="11dp"
-            android:text="Filter"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
             android:onClick="onFilterClicked"
+            android:text="Filter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,8 +51,8 @@
             android:id="@+id/sortb"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
             android:onClick="onSort"
             android:text="Sort"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +63,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-  />
+        android:layout_height="500dp" />
 
 </LinearLayout>
