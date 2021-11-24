@@ -75,16 +75,16 @@ public class CabListings extends AppCompatActivity {
 
     public static List<CabItem> getCabListings() {
         List<CabItem> list = new ArrayList<>();
-        list.add(new CabItem("Uber", 13, "8 min", "Premium", 3, R.drawable.uber));
-        list.add(new CabItem("Lyft", 15, "3 min", "Economy", 3, R.drawable.lyft));
-        list.add(new CabItem("Lyft", 19, "6 min", "Premium", 3, R.drawable.lyft));
-        list.add(new CabItem("Uber", 21, "9 min", "Economy", 3, R.drawable.uber));
-        list.add(new CabItem("Uber", 19, "10 min", "Premium", 5, R.drawable.uber));
-        list.add(new CabItem("Uber", 13, "8 min", "Premium", 3, R.drawable.uber));
-        list.add(new CabItem("Lyft", 15, "3 min", "Economy", 3, R.drawable.lyft));
-        list.add(new CabItem("Lyft", 19, "6 min", "Premium", 3, R.drawable.lyft));
-        list.add(new CabItem("Uber", 21, "9 min", "Economy", 3, R.drawable.uber));
-        list.add(new CabItem("Uber", 19, "10 min", "Premium", 5, R.drawable.uber));
+        list.add(new CabItem.CabItemBuilder("Uber", R.drawable.uber).cabTier("Premium").cost(13).maxSeats(3).pickupTime(8).build());
+        list.add(new CabItem("Lyft", 15, 3, "Economy", 3, R.drawable.lyft));
+        list.add(new CabItem("Lyft", 19, 6, "Premium", 3, R.drawable.lyft));
+        list.add(new CabItem("Uber", 21, 9, "Economy", 3, R.drawable.uber));
+        list.add(new CabItem("Uber", 19, 10, "Premium", 5, R.drawable.uber));
+        list.add(new CabItem("Uber", 13, 8, "Premium", 3, R.drawable.uber));
+        list.add(new CabItem("Lyft", 15, 3, "Economy", 3, R.drawable.lyft));
+        list.add(new CabItem("Lyft", 19, 6, "Premium", 3, R.drawable.lyft));
+        list.add(new CabItem("Uber", 21, 9, "Economy", 3, R.drawable.uber));
+        list.add(new CabItem("Uber", 19, 10, "Premium", 5, R.drawable.uber));
         return list;
     }
 
@@ -114,16 +114,16 @@ public class CabListings extends AppCompatActivity {
         List<CabItem> list = new ArrayList<>();
 
         // PROTOTYPE: Placeholder Cab Listings
-        list.add(new CabItem("Uber", 13, "8 min", "Premium", 3, R.drawable.uber));
-        list.add(new CabItem("Uber", 13, "8 min", "Premium", 3, R.drawable.uber));
-        list.add(new CabItem("Lyft", 15, "3 min", "Economy", 3, R.drawable.lyft));
-        list.add(new CabItem("Lyft", 15, "3 min", "Economy", 3, R.drawable.lyft));
-        list.add(new CabItem("Lyft", 19, "6 min", "Premium", 3, R.drawable.lyft));
-        list.add(new CabItem("Lyft", 19, "6 min", "Premium", 3, R.drawable.lyft));
-        list.add(new CabItem("Uber", 19, "10 min", "Premium", 5, R.drawable.uber));
-        list.add(new CabItem("Uber", 19, "10 min", "Premium", 5, R.drawable.uber));
-        list.add(new CabItem("Uber", 21, "9 min", "Economy", 3, R.drawable.uber));
-        list.add(new CabItem("Uber", 21, "9 min", "Economy", 3, R.drawable.uber));
+        list.add(new CabItem("Uber", 13, 8, "Premium", 3, R.drawable.uber));
+        list.add(new CabItem("Uber", 13, 8, "Premium", 3, R.drawable.uber));
+        list.add(new CabItem("Lyft", 15, 3, "Economy", 3, R.drawable.lyft));
+        list.add(new CabItem("Lyft", 15, 3, "Economy", 3, R.drawable.lyft));
+        list.add(new CabItem("Lyft", 19, 6, "Premium", 3, R.drawable.lyft));
+        list.add(new CabItem("Lyft", 19, 6, "Premium", 3, R.drawable.lyft));
+        list.add(new CabItem("Uber", 19, 10, "Premium", 5, R.drawable.uber));
+        list.add(new CabItem("Uber", 19, 10, "Premium", 5, R.drawable.uber));
+        list.add(new CabItem("Uber", 21, 9, "Economy", 3, R.drawable.uber));
+        list.add(new CabItem("Uber", 21, 9, "Economy", 3, R.drawable.uber));
         return list;
     }
 
@@ -132,16 +132,16 @@ public class CabListings extends AppCompatActivity {
         List<CabItem> list = new ArrayList<>();
 
         // PROTOTYPE: Placeholder Cab Listings
-        list.add(new CabItem("Lyft", 15, "3 min", "Economy", 3, R.drawable.lyft));
-        list.add(new CabItem("Lyft", 15, "3 min", "Economy", 3, R.drawable.lyft));
-        list.add(new CabItem("Lyft", 19, "6 min", "Premium", 3, R.drawable.lyft));
-        list.add(new CabItem("Lyft", 19, "6 min", "Premium", 3, R.drawable.lyft));
-        list.add(new CabItem("Uber", 13, "8 min", "Premium", 3, R.drawable.uber));
-        list.add(new CabItem("Uber", 13, "8 min", "Premium", 3, R.drawable.uber));
-        list.add(new CabItem("Uber", 21, "9 min", "Economy", 3, R.drawable.uber));
-        list.add(new CabItem("Uber", 21, "9 min", "Economy", 3, R.drawable.uber));
-        list.add(new CabItem("Uber", 19, "10 min", "Premium", 5, R.drawable.uber));
-        list.add(new CabItem("Uber", 19, "10 min", "Premium", 5, R.drawable.uber));
+        list.add(new CabItem("Lyft", 15, 3, "Economy", 3, R.drawable.lyft));
+        list.add(new CabItem("Lyft", 15, 3, "Economy", 3, R.drawable.lyft));
+        list.add(new CabItem("Lyft", 19, 6, "Premium", 3, R.drawable.lyft));
+        list.add(new CabItem("Lyft", 19, 6, "Premium", 3, R.drawable.lyft));
+        list.add(new CabItem("Uber", 13, 8, "Premium", 3, R.drawable.uber));
+        list.add(new CabItem("Uber", 13, 8, "Premium", 3, R.drawable.uber));
+        list.add(new CabItem("Uber", 21, 9, "Economy", 3, R.drawable.uber));
+        list.add(new CabItem("Uber", 21, 9, "Economy", 3, R.drawable.uber));
+        list.add(new CabItem("Uber", 19, 10, "Premium", 5, R.drawable.uber));
+        list.add(new CabItem("Uber", 19, 10, "Premium", 5, R.drawable.uber));
         return list;
     }
 

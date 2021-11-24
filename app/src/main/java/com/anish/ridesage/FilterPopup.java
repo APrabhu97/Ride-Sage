@@ -3,10 +3,8 @@ package com.anish.ridesage;
 import static java.lang.Integer.parseInt;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -97,7 +95,7 @@ public class FilterPopup {
         }
         if(filterTierValue != ""){
             items = items.stream()
-                    .filter(cabItem -> cabItem.getCabType() == filterTierValue)
+                    .filter(cabItem -> cabItem.getCabTier() == filterTierValue)
                     .collect(Collectors.toList());
         }
         cabListings = items;

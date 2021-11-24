@@ -1,10 +1,7 @@
 package com.anish.ridesage;
 
 import android.content.Context;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -39,9 +36,9 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //setting the movie data in the individual view holder
         CabItem m = cabList.get(position);
-        holder.cabType.setText(m.getCabType());
+        holder.cabType.setText(m.getCabTier());
         holder.maxSeats.setText(m.getMaxSeats().toString());
-        holder.pickupTime.setText(m.getPickupTime());
+        holder.pickupTime.setText(m.getPickupTime()+" min");
         holder.price.setText("$"+m.getCost());
         holder.cabIcon.setImageResource(m.getIconId());
         holder.cabItem = m;

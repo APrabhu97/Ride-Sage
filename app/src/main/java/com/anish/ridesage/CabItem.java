@@ -4,40 +4,37 @@ import android.os.Parcelable;
 
 public class CabItem implements Parcelable {
     private String provider;
-    private Integer cost;
-    private String pickupTime;
-    private String cabType;
-    private Integer maxSeats;
-    private Integer iconId;
+    private int cost;
+    private int pickupTime;
+    private String cabTier;
+    private int maxSeats;
+    private int iconId;
 
-    public CabItem(String provider, Integer cost, String pickupTime, String cabType, Integer maxSeats, Integer iconId) {
+    public CabItem(String provider, Integer cost, int pickupTime, String cabTier, Integer maxSeats, Integer iconId) {
         this.provider = provider;
         this.cost = cost;
         this.pickupTime = pickupTime;
-        this.cabType = cabType;
+        this.cabTier = cabTier;
         this.maxSeats = maxSeats;
         this.iconId = iconId;
     }
 
+    public CabItem(CabItemBuilder builder) {
+        this.provider = builder.provider;
+        this.cost = builder.cost;
+        this.pickupTime = builder.pickupTime;
+        this.cabTier = builder.cabTier;
+        this.maxSeats = builder.maxSeats;
+        this.iconId = builder.iconId;
+    }
+
     protected CabItem(Parcel in) {
         provider = in.readString();
-        if (in.readByte() == 0) {
-            cost = null;
-        } else {
-            cost = in.readInt();
-        }
-        pickupTime = in.readString();
-        cabType = in.readString();
-        if (in.readByte() == 0) {
-            maxSeats = null;
-        } else {
-            maxSeats = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            iconId = null;
-        } else {
-            iconId = in.readInt();
-        }
+        cost = in.readInt();
+        pickupTime = in.readInt();
+        cabTier = in.readString();
+        maxSeats = in.readInt();
+        iconId = in.readInt();
     }
 
     public static final Creator<CabItem> CREATOR = new Creator<CabItem>() {
@@ -68,20 +65,20 @@ public class CabItem implements Parcelable {
         this.cost = cost;
     }
 
-    public String getPickupTime() {
+    public int getPickupTime() {
         return pickupTime;
     }
 
-    public void setPickupTime(String pickupTime) {
+    public void setPickupTime(int pickupTime) {
         this.pickupTime = pickupTime;
     }
 
-    public String getCabType() {
-        return cabType;
+    public String getCabTier() {
+        return cabTier;
     }
 
-    public void setCabType(String cabType) {
-        this.cabType = cabType;
+    public void setCabTier(String cabTier) {
+        this.cabTier = cabTier;
     }
 
     public Integer getMaxSeats() {
@@ -108,12 +105,50 @@ public class CabItem implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(provider);
-        parcel.writeString(pickupTime);
+        parcel.writeInt(pickupTime);
         parcel.writeInt(cost);
-        parcel.writeString(cabType);
+        parcel.writeString(cabTier);
         parcel.writeInt(maxSeats);
         parcel.writeInt(iconId);
+    }
 
+    public static class CabItemBuilder{
+        private final String provider;
+        private final int iconId;
 
+        private int cost;
+        private int pickupTime;
+        private String cabTier;
+        private int maxSeats;
+
+        public CabItemBuilder(String provider, int iconId){
+            this.provider = provider;
+            this.iconId = iconId;
+        }
+
+        public CabItemBuilder cost(int cost){
+            this.cost = cost;
+            return this;
+        }
+
+        public CabItemBuilder pickupTime(int pickupTime){
+            this.pickupTime = pickupTime;
+            return this;
+        }
+
+        public CabItemBuilder cabTier(String cabTier){
+            this.cabTier = cabTier;
+            return this;
+        }
+
+        public CabItemBuilder maxSeats(int maxSeats){
+            this.maxSeats = maxSeats;
+            return this;
+        }
+
+        public CabItem build(){
+            CabItem cb = new CabItem(this);
+            return cb;
+        }
     }
 }
