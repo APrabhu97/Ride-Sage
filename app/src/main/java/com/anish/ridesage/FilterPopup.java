@@ -3,10 +3,8 @@ package com.anish.ridesage;
 import static java.lang.Integer.parseInt;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -65,7 +63,7 @@ public class FilterPopup {
         Spinner dynamicSpinner = (Spinner) view.findViewById(R.id.platformSelect);
         String[] platforms = new String[]{"", "Uber", "Lyft"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                android.R.layout.simple_spinner_dropdown_item, platforms);
+                R.layout.item, platforms);
         dynamicSpinner.setAdapter(adapter);
         dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -97,7 +95,7 @@ public class FilterPopup {
         }
         if(filterTierValue != ""){
             items = items.stream()
-                    .filter(cabItem -> cabItem.getCabType() == filterTierValue)
+                    .filter(cabItem -> cabItem.getCabTier() == filterTierValue)
                     .collect(Collectors.toList());
         }
         cabListings = items;
@@ -108,7 +106,7 @@ public class FilterPopup {
         Spinner dynamicSpinner = (Spinner) view.findViewById(R.id.seatSelect);
         String[] platforms = new String[]{"", "3", "5"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                android.R.layout.simple_spinner_dropdown_item, platforms);
+                R.layout.item, platforms);
         dynamicSpinner.setAdapter(adapter);
         dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -130,7 +128,7 @@ public class FilterPopup {
         Spinner dynamicSpinner = (Spinner) view.findViewById(R.id.tierSelect);
         String[] platforms = new String[]{"", "Economy", "Premium"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                android.R.layout.simple_spinner_dropdown_item, platforms);
+                R.layout.item, platforms);
         dynamicSpinner.setAdapter(adapter);
         dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

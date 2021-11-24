@@ -8,38 +8,44 @@
 
     <EditText
         android:id="@+id/findRideSource"
-        android:layout_width="315dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="324dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="56dp"
+        android:backgroundTint="@color/lilac"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Destination"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/findRideDestination"
-        android:layout_width="315dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="324dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/lilac"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Current Location"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/findRideSource"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cabListSource" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.551" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="285dp"
         android:layout_height="432dp"
-        android:layout_marginStart="60dp"
         android:layout_marginTop="22dp"
-        android:layout_marginBottom="148dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cabListDestination"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.422"
         app:srcCompat="@drawable/googlemapprev" />
 
     <Button
@@ -49,7 +55,11 @@
         android:layout_marginTop="36dp"
         android:onClick="onButtonClicked"
         android:text="@string/stringFindRide"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.197" />
 </androidx.constraintlayout.widget.ConstraintLayout>
