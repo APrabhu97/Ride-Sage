@@ -27,5 +27,8 @@
     <string name="buttonCheapest">Cheapest</string>
     <string name="buttonFastest">Fastest</string>
 
+<!--    API KEY-->
+    <string name="com.google.android.geo.API_KEY">AIzaSyAfK5oFqe6XlShgsrEXNTMN4ePRDBz48PM</string>
+
 
 </resources>

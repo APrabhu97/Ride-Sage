@@ -18,9 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-      <activity
-            android:name=".SortPopup"
-            android:exported="true" />
         <activity
             android:name=".BookingCompleteActivity"
             android:exported="true" />
@@ -34,6 +31,9 @@
             android:name=".FindRideActivity"
             android:exported="true">
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/com.google.android.geo.API_KEY" />
     </application>
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 </manifest>
