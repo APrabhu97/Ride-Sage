@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".FindRideActivity">
 
-    <EditText
-        android:id="@+id/findRideSource"
+    <AutoCompleteTextView
+        android:id="@+id/findRideDestination"
         android:layout_width="324dp"
         android:layout_height="48dp"
         android:layout_marginTop="56dp"
@@ -20,16 +20,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/findRideDestination"
+    <AutoCompleteTextView
+        android:id="@+id/findRideSource"
         android:layout_width="324dp"
         android:layout_height="48dp"
         android:backgroundTint="@color/lilac"
         android:ems="10"
-        android:hint="Current Location"
+        android:hint="Source"
         android:inputType="textPersonName"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/findRideSource"
+        app:layout_constraintBottom_toTopOf="@+id/findRideDestination"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

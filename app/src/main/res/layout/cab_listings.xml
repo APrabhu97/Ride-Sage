@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/cabListSource"
         android:layout_width="315dp"
         android:layout_height="41dp"
@@ -14,12 +14,11 @@
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/lilac"
         android:ems="10"
-        android:hint="Current Location"
+        android:hint="Source"
         android:inputType="textPersonName"
-        android:text="@string/stringInput"
         android:textColor="@color/white" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/cabListDestination"
         android:layout_width="315dp"
         android:layout_height="41dp"
@@ -29,7 +28,6 @@
         android:ems="10"
         android:hint="Destination"
         android:inputType="textPersonName"
-        android:text="@string/stringOutput"
         android:textColor="@color/white" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
