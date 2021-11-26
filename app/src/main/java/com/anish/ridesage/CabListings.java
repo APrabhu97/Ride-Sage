@@ -1,28 +1,20 @@
 package com.anish.ridesage;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AutoCompleteTextView;
 import android.widget.PopupMenu;
-import android.widget.Spinner;
-import android.widget.Toast;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
-
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,20 +23,17 @@ public class CabListings extends AppCompatActivity {
     // Cab Listing List
     List<CabItem> cabListings;
 
-    // Dialog and Builder
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog dialog;
-
     // Main View Elements
     RecyclerView recyclerView;
-    private EditText source;
-    private EditText destination;
+    private Place sourcePlace, destinationPlace;
+    AutoCompleteTextView sourceAutocomplete, destinationAutocomplete;
+    private PlacesClient placesClient;
 
     CabItemClickListener listener = (cabItem) -> {
         Intent myIntent = new Intent(this, BookRideActivity.class);
         myIntent.putExtra("cabItem", cabItem);
-        myIntent.putExtra("source", source.getText().toString());
-        myIntent.putExtra("destination", destination.getText().toString());
+        myIntent.putExtra("source", sourcePlace);
+        myIntent.putExtra("destination", destinationPlace);
         startActivity(myIntent);
     };
 
@@ -57,13 +46,19 @@ public class CabListings extends AppCompatActivity {
 
         // Assign view elements
         recyclerView = findViewById(R.id.recycler_view);
-        source = findViewById(R.id.cabListSource);
-        destination = findViewById(R.id.cabListDestination);
+        sourceAutocomplete = findViewById(R.id.cabListSource);
+        destinationAutocomplete = findViewById(R.id.cabListDestination);
 
         //handling intent
         Intent i = getIntent();
-        source.setText(i.getStringExtra("source"));
-        destination.setText(i.getStringExtra("destination"));
+        sourcePlace = i.getParcelableExtra("source");
+        destinationPlace = i.getParcelableExtra("destination");
+        sourceAutocomplete.setText(sourcePlace.getName());
+        destinationAutocomplete.setText(destinationPlace.getName());
+
+        Places.initialize(this, getString(R.string.com_google_android_geo_API_KEY));
+        placesClient = Places.createClient(this);
+        initAutocomplete();
 
         // Recycler View
         CabAdapter adapter = new CabAdapter(cabListings, listener);
@@ -150,4 +145,26 @@ public class CabListings extends AppCompatActivity {
         filterPopup.showPopupWindow(v);
     }
 
+    private void initAutocomplete(){
+        PlaceAutocompleteAdapter sourceAdapter = new PlaceAutocompleteAdapter(this, placesClient, (place) -> {
+            sourcePlace = place;
+            sourceAutocomplete.setText(place.getName());
+            sourceAutocomplete.dismissDropDown();
+            hideKeyboard();
+        });
+        sourceAutocomplete.setAdapter(sourceAdapter);
+
+        PlaceAutocompleteAdapter destinationAdapter = new PlaceAutocompleteAdapter(this, placesClient, (place) -> {
+            destinationPlace = place;
+            destinationAutocomplete.setText(place.getName());
+            destinationAutocomplete.dismissDropDown();
+            hideKeyboard();
+        });
+        destinationAutocomplete.setAdapter(destinationAdapter);
+    }
+
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(findViewById(android.R.id.content).getRootView().getWindowToken(), 0);
+    }
 }
