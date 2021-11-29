@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.DecimalFormat;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,9 +54,15 @@ public class BookRideActivity extends AppCompatActivity implements PointsParser.
         setContentView(R.layout.book_ride);
         source = findViewById(R.id.bookSource);
         destination = findViewById(R.id.bookDestination);
+        TextView price = findViewById(R.id.price);
+
         Intent i = getIntent();
+        double cost = i.getDoubleExtra("cost", 0.0);
         sourcePlace = i.getParcelableExtra("source");
         destinationPlace = i.getParcelableExtra("destination");
+
+        DecimalFormat df = new DecimalFormat("#0.00");
+        price.setText(df.format(cost));
         source.setText(sourcePlace.getName());
         destination.setText(destinationPlace.getName());
 

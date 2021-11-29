@@ -12,6 +12,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.icu.text.DecimalFormat;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -100,6 +102,8 @@ public class FindRideActivity extends AppCompatActivity  implements PointsParser
         Intent myIntent = new Intent(this, CabListings.class);
         myIntent.putExtra("source", sourcePlace);
         myIntent.putExtra("destination", destinationPlace);
+        double distance = getDistance();
+        myIntent.putExtra("distance", distance);
         startActivity(myIntent);
     }
 
@@ -207,5 +211,23 @@ public class FindRideActivity extends AppCompatActivity  implements PointsParser
     private void hideKeyboard(){
         InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(findViewById(android.R.id.content).getRootView().getWindowToken(), 0);
+    }
+
+    private double getDistance()
+    {
+        Location locationA = new Location("source");
+
+        locationA.setLatitude(sourcePlace.getLatLng().latitude);
+        locationA.setLongitude(sourcePlace.getLatLng().longitude);
+
+        Location locationB = new Location("des");
+
+        locationB.setLatitude(destinationPlace.getLatLng().latitude);
+        locationB.setLongitude(destinationPlace.getLatLng().longitude);
+
+        double meters = locationA.distanceTo(locationB);
+        double miles = meters/1609;
+
+        return miles;
     }
 }

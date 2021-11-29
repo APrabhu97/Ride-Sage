@@ -52,10 +52,9 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="376dp"
         android:layout_height="551dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="119dp"
-        android:layout_marginBottom="61dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/findRideDestination"
+        app:layout_constraintVertical_bias="0.513" />
 </androidx.constraintlayout.widget.ConstraintLayout>
