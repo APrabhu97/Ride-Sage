@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".FindRideActivity">
 
+    <ImageView
+        android:id="@+id/providerIcon"
+        android:layout_width="28dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/src_dest" />
+
     <AutoCompleteTextView
         android:id="@+id/findRideDestination"
         android:layout_width="324dp"
