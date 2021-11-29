@@ -1,6 +1,7 @@
 package com.anish.ridesage;
 
 import android.content.Context;
+import android.icu.text.DecimalFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +36,12 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //setting the movie data in the individual view holder
+        DecimalFormat df = new DecimalFormat("#0.00");
         CabItem m = cabList.get(position);
         holder.cabType.setText(m.getCabTier());
         holder.maxSeats.setText(m.getMaxSeats().toString());
         holder.pickupTime.setText(m.getPickupTime()+" min");
-        holder.price.setText("$"+m.getCost());
+        holder.price.setText("$"+df.format(m.getCost()));
         holder.cabIcon.setImageResource(m.getIconId());
         holder.cabItem = m;
     }
