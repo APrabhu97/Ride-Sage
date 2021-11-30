@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FilterPopup {
@@ -24,15 +25,24 @@ public class FilterPopup {
     RecyclerView rv;
     CabItemClickListener listener;
     List<CabItem> cabListings;
+    Map<String, String> filters;
 
     String filterPlatformValue = "";
     String filterSeatValue = "";
     String filterTierValue = "";
 
-    public FilterPopup(RecyclerView rv, CabItemClickListener listener, List<CabItem> cabListings) {
+    public FilterPopup(RecyclerView rv, CabItemClickListener listener, List<CabItem> cabListings,
+                       Map<String, String> filters) {
         this.rv = rv;
         this.listener = listener;
         this.cabListings = cabListings;
+        this.filters = filters;
+
+        this.filterPlatformValue = filters.get("platform");
+        this.filterSeatValue = filters.get("seats");
+        this.filterTierValue = filters.get("tier");
+
+        
     }
 
     public void showPopupWindow(final View view) {
@@ -59,6 +69,12 @@ public class FilterPopup {
         setTierSpinnerData(popupView);
     }
 
+    private void setMapData() {
+        this.filters.put("platform", filterPlatformValue);
+        this.filters.put("seats", filterTierValue);
+        this.filters.put("tier", filterSeatValue);
+    }
+
     private void setPlatformSpinnerData(View view) {
         Spinner dynamicSpinner = (Spinner) view.findViewById(R.id.platformSelect);
         String[] platforms = new String[]{"", "Uber", "Lyft"};
@@ -71,6 +87,7 @@ public class FilterPopup {
                                        final int position, long id) {
                 filterPlatformValue = (String) parent.getItemAtPosition(position);
                 CabAdapter adapter = new CabAdapter(getFilteredData(), listener);
+                setMapData();
                 rv.setAdapter(adapter);
             }
 
@@ -114,6 +131,7 @@ public class FilterPopup {
                                        int position, long id) {
                 filterSeatValue = (String) parent.getItemAtPosition(position);
                 CabAdapter adapter = new CabAdapter(getFilteredData(), listener);
+                setMapData();
                 rv.setAdapter(adapter);
             }
 
@@ -136,6 +154,7 @@ public class FilterPopup {
                                        int position, long id) {
                 filterTierValue = (String) parent.getItemAtPosition(position);
                 CabAdapter adapter = new CabAdapter(getFilteredData(), listener);
+                setMapData();
                 rv.setAdapter(adapter);
             }
 

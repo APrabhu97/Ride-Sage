@@ -19,7 +19,9 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CabListings extends AppCompatActivity {
     // Cab Listing List
@@ -100,13 +102,23 @@ public class CabListings extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                List<CabItem> cabListingFiltered = ((CabAdapter)recyclerView.getAdapter()).getCabList();
+
                 switch (item.getItemId()) {
                     case R.id.cheapestB:
-                        CabAdapter adapter = new CabAdapter(cheapestList(), listener);
+                        cabListingFiltered.sort((cabItem1, cabItem2) ->
+                                cabItem1.getCost() > cabItem2.getCost()? 1:-1
+                        );
+
+                        CabAdapter adapter = new CabAdapter(cabListingFiltered, listener);
                         recyclerView.setAdapter(adapter);
                         break;
                     case R.id.fastestB:
-                        CabAdapter adapter2 = new CabAdapter(fastestList(), listener);
+                        cabListingFiltered.sort((cabItem1, cabItem2) ->
+                                cabItem1.getPickupTime() > cabItem2.getPickupTime()? 1:-1
+                        );
+
+                        CabAdapter adapter2 = new CabAdapter(cabListingFiltered, listener);
                         recyclerView.setAdapter(adapter2);
                         break;
                 }
@@ -151,7 +163,12 @@ public class CabListings extends AppCompatActivity {
     }
 
     public void onFilterClicked(View v){
-        FilterPopup filterPopup = new FilterPopup(recyclerView, listener, cabListings);
+        Map<String, String> filters = new HashMap<>();
+        filters.put("platform", "");
+        filters.put("seats", "");
+        filters.put("tier", "");
+
+        FilterPopup filterPopup = new FilterPopup(recyclerView, listener, cabListings, filters);
         filterPopup.showPopupWindow(v);
     }
 
