@@ -26,6 +26,7 @@ import java.util.Map;
 public class CabListings extends AppCompatActivity {
     // Cab Listing List
     List<CabItem> cabListings;
+    Map<String, String> filters = new HashMap<>();
 
     // Main View Elements
     RecyclerView recyclerView;
@@ -52,6 +53,9 @@ public class CabListings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cab_listings);
 
+        filters.put("platform", "");
+        filters.put("seats", "");
+        filters.put("tier", "");
 
         // Assign view elements
         recyclerView = findViewById(R.id.recycler_view);
@@ -110,6 +114,10 @@ public class CabListings extends AppCompatActivity {
                                 cabItem1.getCost() > cabItem2.getCost()? 1:-1
                         );
 
+                        cabListings.sort((cabItem1, cabItem2) ->
+                                cabItem1.getCost() > cabItem2.getCost()? 1:-1
+                        );
+
                         CabAdapter adapter = new CabAdapter(cabListingFiltered, listener);
                         recyclerView.setAdapter(adapter);
                         break;
@@ -117,6 +125,11 @@ public class CabListings extends AppCompatActivity {
                         cabListingFiltered.sort((cabItem1, cabItem2) ->
                                 cabItem1.getPickupTime() > cabItem2.getPickupTime()? 1:-1
                         );
+
+                        cabListings.sort((cabItem1, cabItem2) ->
+                                cabItem1.getPickupTime() > cabItem2.getPickupTime()? 1:-1
+                        );
+
 
                         CabAdapter adapter2 = new CabAdapter(cabListingFiltered, listener);
                         recyclerView.setAdapter(adapter2);
@@ -163,11 +176,6 @@ public class CabListings extends AppCompatActivity {
     }
 
     public void onFilterClicked(View v){
-        Map<String, String> filters = new HashMap<>();
-        filters.put("platform", "");
-        filters.put("seats", "");
-        filters.put("tier", "");
-
         FilterPopup filterPopup = new FilterPopup(recyclerView, listener, cabListings, filters);
         filterPopup.showPopupWindow(v);
     }

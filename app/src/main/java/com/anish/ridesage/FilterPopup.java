@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -42,7 +43,7 @@ public class FilterPopup {
         this.filterSeatValue = filters.get("seats");
         this.filterTierValue = filters.get("tier");
 
-        
+
     }
 
     public void showPopupWindow(final View view) {
@@ -69,7 +70,7 @@ public class FilterPopup {
         setTierSpinnerData(popupView);
     }
 
-    private void setMapData() {
+    private void setMapData() {  // 2nd to last step step after resetting: Call this method (filterPlatformValue = "", etc.)
         this.filters.put("platform", filterPlatformValue);
         this.filters.put("seats", filterTierValue);
         this.filters.put("tier", filterSeatValue);
@@ -81,6 +82,7 @@ public class FilterPopup {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
                 R.layout.item, platforms);
         dynamicSpinner.setAdapter(adapter);
+        dynamicSpinner.setSelection(Arrays.asList(platforms).indexOf(filterPlatformValue));  // 1. For reset, set index to 0 (empty string)
         dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(final AdapterView<?> parent, View view,
@@ -100,7 +102,7 @@ public class FilterPopup {
 
     private List<CabItem> getFilteredData(){
         List<CabItem> items = cabListings;
-        if(filterPlatformValue != ""){
+        if(filterPlatformValue != ""){  // 2. Make sure all of these are empty
             items = items.stream()
                     .filter(cabItem -> cabItem.getProvider() == filterPlatformValue)
                     .collect(Collectors.toList());
@@ -115,7 +117,7 @@ public class FilterPopup {
                     .filter(cabItem -> cabItem.getCabTier() == filterTierValue)
                     .collect(Collectors.toList());
         }
-        cabListings = items;
+        // cabListings = items;
         return items;
     }
 
@@ -125,12 +127,13 @@ public class FilterPopup {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
                 R.layout.item, platforms);
         dynamicSpinner.setAdapter(adapter);
+        dynamicSpinner.setSelection(Arrays.asList(platforms).indexOf(filterSeatValue));
         dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 filterSeatValue = (String) parent.getItemAtPosition(position);
-                CabAdapter adapter = new CabAdapter(getFilteredData(), listener);
+                CabAdapter adapter = new CabAdapter(getFilteredData(), listener);  // LAST STEP: Call these 3 lines below
                 setMapData();
                 rv.setAdapter(adapter);
             }
@@ -148,6 +151,7 @@ public class FilterPopup {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
                 R.layout.item, platforms);
         dynamicSpinner.setAdapter(adapter);
+        dynamicSpinner.setSelection(Arrays.asList(platforms).indexOf(filterTierValue));
         dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
