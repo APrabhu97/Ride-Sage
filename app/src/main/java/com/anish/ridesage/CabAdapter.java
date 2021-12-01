@@ -24,6 +24,10 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
         this.CabItemClickListener = listener;
     }
 
+    public List<CabItem> getCabList() {
+        return cabList;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,7 +79,6 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-            //opening the trailer of the movie on click of movie item
             listener.onClick(cabItem);
         }
     }
