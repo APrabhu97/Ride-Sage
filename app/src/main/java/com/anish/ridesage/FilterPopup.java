@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
@@ -22,15 +23,28 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FilterPopup {
-
     RecyclerView rv;
     CabItemClickListener listener;
     List<CabItem> cabListings;
     Map<String, String> filters;
 
+    Button buttonReset;
     String filterPlatformValue = "";
     String filterSeatValue = "";
     String filterTierValue = "";
+
+
+    // setPlatformSpinnerData
+    Spinner dynamicPlatformSpinner;
+    String[] platforms = new String[]{"", "Uber", "Lyft"};
+
+    // setSeatSpinnerData
+    Spinner dynamicSeatSpinner;
+    String[] seats = new String[]{"", "3", "5"};
+
+    // setTierSpinnerData
+    Spinner dynamicTierSpinner;
+    String[] tiers = new String[]{"", "Economy", "Premium"};
 
     public FilterPopup(RecyclerView rv, CabItemClickListener listener, List<CabItem> cabListings,
                        Map<String, String> filters) {
@@ -42,14 +56,21 @@ public class FilterPopup {
         this.filterPlatformValue = filters.get("platform");
         this.filterSeatValue = filters.get("seats");
         this.filterTierValue = filters.get("tier");
-
-
     }
 
     public void showPopupWindow(final View view) {
         //Create a View object yourself through inflater
         LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(view.getContext().LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.activity_filter_popup, null);
+
+        // Configure reset button on popup
+        Button buttonReset = popupView.findViewById(R.id.buttonReset);
+        buttonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickResetButton();
+            }
+        });
 
         //Specify the length and width through constants
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -77,13 +98,12 @@ public class FilterPopup {
     }
 
     private void setPlatformSpinnerData(View view) {
-        Spinner dynamicSpinner = (Spinner) view.findViewById(R.id.platformSelect);
-        String[] platforms = new String[]{"", "Uber", "Lyft"};
+        dynamicPlatformSpinner = (Spinner) view.findViewById(R.id.platformSelect);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
                 R.layout.item, platforms);
-        dynamicSpinner.setAdapter(adapter);
-        dynamicSpinner.setSelection(Arrays.asList(platforms).indexOf(filterPlatformValue));  // 1. For reset, set index to 0 (empty string)
-        dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        dynamicPlatformSpinner.setAdapter(adapter);
+        dynamicPlatformSpinner.setSelection(Arrays.asList(platforms).indexOf(filterPlatformValue));  // 1. For reset, set index to 0 (empty string)
+        dynamicPlatformSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(final AdapterView<?> parent, View view,
                                        final int position, long id) {
@@ -122,13 +142,12 @@ public class FilterPopup {
     }
 
     private void setSeatSpinnerData(View view) {
-        Spinner dynamicSpinner = (Spinner) view.findViewById(R.id.seatSelect);
-        String[] platforms = new String[]{"", "3", "5"};
+        dynamicSeatSpinner = (Spinner) view.findViewById(R.id.seatSelect);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                R.layout.item, platforms);
-        dynamicSpinner.setAdapter(adapter);
-        dynamicSpinner.setSelection(Arrays.asList(platforms).indexOf(filterSeatValue));
-        dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                R.layout.item, seats);
+        dynamicSeatSpinner.setAdapter(adapter);
+        dynamicSeatSpinner.setSelection(Arrays.asList(seats).indexOf(filterSeatValue));
+        dynamicSeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
@@ -146,13 +165,12 @@ public class FilterPopup {
     }
 
     private void setTierSpinnerData(View view) {
-        Spinner dynamicSpinner = (Spinner) view.findViewById(R.id.tierSelect);
-        String[] platforms = new String[]{"", "Economy", "Premium"};
+        dynamicTierSpinner = (Spinner) view.findViewById(R.id.tierSelect);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                R.layout.item, platforms);
-        dynamicSpinner.setAdapter(adapter);
-        dynamicSpinner.setSelection(Arrays.asList(platforms).indexOf(filterTierValue));
-        dynamicSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                R.layout.item, tiers);
+        dynamicTierSpinner.setAdapter(adapter);
+        dynamicTierSpinner.setSelection(Arrays.asList(tiers).indexOf(filterTierValue));
+        dynamicTierSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
@@ -177,6 +195,22 @@ public class FilterPopup {
         p.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         p.dimAmount = 0.3f;
         wm.updateViewLayout(container, p);
+    }
+
+    public void onClickResetButton() {
+        System.out.println("Worked");
+
+        dynamicPlatformSpinner.setSelection(Arrays.asList(platforms).indexOf(""));
+        dynamicSeatSpinner.setSelection(Arrays.asList(seats).indexOf(""));
+        dynamicTierSpinner.setSelection(Arrays.asList(tiers).indexOf(""));
+
+        filterPlatformValue = "";
+        filterSeatValue = "";
+        filterTierValue = "";
+
+        CabAdapter adapter = new CabAdapter(getFilteredData(), listener);  // LAST STEP: Call these 3 lines below
+        setMapData();
+        rv.setAdapter(adapter);
     }
 
 }

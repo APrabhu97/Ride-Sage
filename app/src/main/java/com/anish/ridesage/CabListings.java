@@ -2,13 +2,12 @@ package com.anish.ridesage;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.DecimalFormat;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +37,6 @@ public class CabListings extends AppCompatActivity {
     private double LYFT_PRICE_PER_MILE = 1.6;
     private double UBER_BASE = 4.5;
     private double LYFT_BASE = 3.5;
-
 
     CabItemClickListener listener = (cabItem) -> {
         Intent myIntent = new Intent(this, BookRideActivity.class);
@@ -176,7 +174,14 @@ public class CabListings extends AppCompatActivity {
     }
 
     public void onFilterClicked(View v){
+        Button buttonReset = (Button)findViewById(R.id.buttonReset);
+
+
+
         FilterPopup filterPopup = new FilterPopup(recyclerView, listener, cabListings, filters);
+
+        // buttonReset.setOnClickListener(view -> filterPopup.onClickResetButton());
+
         filterPopup.showPopupWindow(v);
     }
 
