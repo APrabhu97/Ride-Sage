@@ -74,7 +74,16 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
         @Override
         public void onClick(View v) {
             //opening the trailer of the movie on click of movie item
+            v.setBackgroundColor(-7829368);
+
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
             listener.onClick(cabItem);
+
         }
     }
 }

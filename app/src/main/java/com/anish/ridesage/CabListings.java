@@ -3,6 +3,7 @@ package com.anish.ridesage;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -34,6 +35,8 @@ public class CabListings extends AppCompatActivity {
         myIntent.putExtra("cabItem", cabItem);
         myIntent.putExtra("source", sourcePlace);
         myIntent.putExtra("destination", destinationPlace);
+
+
         startActivity(myIntent);
     };
 
