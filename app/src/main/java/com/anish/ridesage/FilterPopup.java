@@ -3,9 +3,11 @@ package com.anish.ridesage;
 import static java.lang.Integer.parseInt;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -93,14 +96,26 @@ public class FilterPopup {
 
     private void setMapData() {  // 2nd to last step step after resetting: Call this method (filterPlatformValue = "", etc.)
         this.filters.put("platform", filterPlatformValue);
-        this.filters.put("seats", filterTierValue);
-        this.filters.put("tier", filterSeatValue);
+        this.filters.put("seats", filterSeatValue);
+        this.filters.put("tier", filterTierValue);
     }
 
     private void setPlatformSpinnerData(View view) {
         dynamicPlatformSpinner = (Spinner) view.findViewById(R.id.platformSelect);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                R.layout.item, platforms);
+                android.R.layout.simple_spinner_dropdown_item, platforms) {
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+
+                // Set the Text color
+                tv.setTextColor(Color.BLACK);
+
+                return view;
+            }
+        };
         dynamicPlatformSpinner.setAdapter(adapter);
         dynamicPlatformSpinner.setSelection(Arrays.asList(platforms).indexOf(filterPlatformValue));  // 1. For reset, set index to 0 (empty string)
         dynamicPlatformSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

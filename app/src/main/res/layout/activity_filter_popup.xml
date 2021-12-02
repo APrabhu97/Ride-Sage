@@ -46,8 +46,10 @@
             android:id="@+id/platformSelect"
             android:layout_width="192dp"
             android:layout_height="30dp"
-            android:layout_marginStart="125dp"
+            android:layout_marginStart="126dp"
             android:layout_marginTop="98dp"
+            android:background="@drawable/spinner_background"
+            android:overlapAnchor="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +63,8 @@
             android:textColor="@color/charcoal"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <TextView
             android:id="@+id/textView16"
@@ -95,7 +98,9 @@
             android:layout_marginStart="126dp"
             android:layout_marginTop="157dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:overlapAnchor="false"
+            android:background="@drawable/spinner_background"/>
 
         <Spinner
             android:id="@+id/tierSelect"
@@ -104,7 +109,9 @@
             android:layout_marginStart="126dp"
             android:layout_marginTop="208dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:overlapAnchor="false"
+            android:background="@drawable/spinner_background"/>
 
 
     </androidx.cardview.widget.CardView>
