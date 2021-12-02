@@ -47,6 +47,10 @@ public class BookRideActivity extends AppCompatActivity implements PointsParser.
     private Place sourcePlace, destinationPlace;
     private Polyline currentPolyline;
 
+    private int time = 0;
+    private CabItem cabItem;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +58,17 @@ public class BookRideActivity extends AppCompatActivity implements PointsParser.
         setContentView(R.layout.book_ride);
         source = findViewById(R.id.bookSource);
         destination = findViewById(R.id.bookDestination);
+
         TextView price = findViewById(R.id.price);
 
         Intent i = getIntent();
+        cabItem = i.getParcelableExtra("cabItem");
+        time = i.getIntExtra("ti", 0);
+
+
+
+
+
         double cost = i.getDoubleExtra("cost", 0.0);
         sourcePlace = i.getParcelableExtra("source");
         destinationPlace = i.getParcelableExtra("destination");
@@ -81,11 +93,21 @@ public class BookRideActivity extends AppCompatActivity implements PointsParser.
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent myIntent = new Intent(this, CabListings.class);
+        myIntent.putExtra("source", sourcePlace);
+        myIntent.putExtra("destination", destinationPlace);
+        startActivity(myIntent);
+    }
+
+
+
     @SuppressLint("MissingPermission")
     private void updateLocationUI() {
         try {
-                mMap.setMyLocationEnabled(true);
-                mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
         } catch (SecurityException e)  {
             Log.e("Exception: %s", e.getMessage());
         }
@@ -93,6 +115,7 @@ public class BookRideActivity extends AppCompatActivity implements PointsParser.
 
     public void onButtonClicked(View v){
         Intent myIntent = new Intent(this, BookingCompleteActivity.class);
+        myIntent.putExtra("time", Integer.toString(time) + " Minutes");
         startActivity(myIntent);
     }
 

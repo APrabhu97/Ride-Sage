@@ -43,6 +43,9 @@ public class CabListings extends AppCompatActivity {
         myIntent.putExtra("cost", cabItem.getCost());
         myIntent.putExtra("source", sourcePlace);
         myIntent.putExtra("destination", destinationPlace);
+        myIntent.putExtra("cabItem", cabItem);
+        myIntent.putExtra("ti", cabItem.getPickupTime());
+
         startActivity(myIntent);
     };
 

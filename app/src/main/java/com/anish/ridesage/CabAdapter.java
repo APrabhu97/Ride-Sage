@@ -1,7 +1,6 @@
 package com.anish.ridesage;
 
 import android.content.Context;
-import android.icu.text.DecimalFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
@@ -24,10 +24,6 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
         this.CabItemClickListener = listener;
     }
 
-    public List<CabItem> getCabList() {
-        return cabList;
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,13 +35,14 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //setting the movie data in the individual view holder
         DecimalFormat df = new DecimalFormat("#0.00");
+        //setting the movie data in the individual view holder
         CabItem m = cabList.get(position);
         holder.cabType.setText(m.getCabTier());
         holder.maxSeats.setText(m.getMaxSeats().toString());
         holder.pickupTime.setText(m.getPickupTime()+" min");
         holder.price.setText("$"+df.format(m.getCost()));
+        //holder.price.setText("$"+m.getCost());
         holder.cabIcon.setImageResource(m.getIconId());
         holder.cabItem = m;
     }
@@ -53,6 +50,10 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return cabList.size();
+    }
+
+    public List<CabItem> getCabList() {
+        return cabList;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -79,6 +80,8 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
 
         @Override
         public void onClick(View v) {
+            //opening the trailer of the movie on click of movie item
+            v.setBackgroundColor(-7829368);
             listener.onClick(cabItem);
         }
     }

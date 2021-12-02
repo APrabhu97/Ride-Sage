@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".FindRideActivity">
 
-    <ImageView
-        android:id="@+id/providerIcon"
-        android:layout_width="28dp"
-        android:layout_height="76dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/src_dest" />
-
     <AutoCompleteTextView
         android:id="@+id/findRideDestination"
         android:layout_width="324dp"
@@ -47,24 +37,28 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="204dp"
-        android:layout_height="53dp"
+        android:layout_width="331dp"
+        android:layout_height="97dp"
         android:onClick="onButtonClicked"
         android:text="@string/stringFindRide"
-        android:textSize="20sp"
+        android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.974" />
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="376dp"
         android:layout_height="551dp"
+        android:layout_marginTop="119dp"
+        android:layout_marginBottom="61dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/findRideDestination"
-        app:layout_constraintVertical_bias="0.513" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
