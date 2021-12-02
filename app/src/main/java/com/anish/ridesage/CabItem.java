@@ -4,13 +4,13 @@ import android.os.Parcelable;
 
 public class CabItem implements Parcelable {
     private String provider;
-    private int cost;
+    private double cost;
     private int pickupTime;
     private String cabTier;
     private int maxSeats;
     private int iconId;
 
-    public CabItem(String provider, Integer cost, int pickupTime, String cabTier, Integer maxSeats, Integer iconId) {
+    public CabItem(String provider, double cost, int pickupTime, String cabTier, Integer maxSeats, Integer iconId) {
         this.provider = provider;
         this.cost = cost;
         this.pickupTime = pickupTime;
@@ -30,7 +30,7 @@ public class CabItem implements Parcelable {
 
     protected CabItem(Parcel in) {
         provider = in.readString();
-        cost = in.readInt();
+        cost = in.readDouble();
         pickupTime = in.readInt();
         cabTier = in.readString();
         maxSeats = in.readInt();
@@ -57,11 +57,9 @@ public class CabItem implements Parcelable {
         this.provider = provider;
     }
 
-    public Integer getCost() {
-        return cost;
-    }
+    public double getCost() { return cost;}
 
-    public void setCost(Integer cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
@@ -106,7 +104,7 @@ public class CabItem implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(provider);
         parcel.writeInt(pickupTime);
-        parcel.writeInt(cost);
+        parcel.writeDouble(cost);
         parcel.writeString(cabTier);
         parcel.writeInt(maxSeats);
         parcel.writeInt(iconId);
@@ -116,7 +114,7 @@ public class CabItem implements Parcelable {
         private final String provider;
         private final int iconId;
 
-        private int cost;
+        private double cost;
         private int pickupTime;
         private String cabTier;
         private int maxSeats;
@@ -126,7 +124,7 @@ public class CabItem implements Parcelable {
             this.iconId = iconId;
         }
 
-        public CabItemBuilder cost(int cost){
+        public CabItemBuilder cost(double cost){
             this.cost = cost;
             return this;
         }
