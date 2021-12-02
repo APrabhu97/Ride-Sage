@@ -54,9 +54,9 @@ public class CabListings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cab_listings);
 
-        filters.put("platform", "");
-        filters.put("seats", "");
-        filters.put("tier", "");
+        filters.put("platform", "None");
+        filters.put("seats", "None");
+        filters.put("tier", "None");
 
         // Assign view elements
         recyclerView = findViewById(R.id.recycler_view);

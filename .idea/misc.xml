@@ -3,11 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Timot/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.4203125" />
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/drawable/ic_launcher_background.xml" value="0.4203125" />
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/drawable/spinner_background.xml" value="0.26510416666666664" />
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/layout/activity_booking_complete.xml" value="0.24895833333333334" />
-        <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/layout/activity_filter_popup.xml" value="0.4041666666666667" />
+        <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/layout/activity_filter_popup.xml" value="0.1" />
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/layout/book_ride.xml" value="0.4041666666666667" />
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/layout/cab_item.xml" value="0.38229166666666664" />
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/layout/cab_listings.xml" value="0.38229166666666664" />
@@ -16,6 +17,7 @@
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/layout/main_activity.xml" value="0.4041666666666667" />
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/layout/place_prediction_item.xml" value="0.4041666666666667" />
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/layout/spinner_background.xml" value="0.4041666666666667" />
+        <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/layout/spinner_dropdown_items.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/Timot/Documents/GitHub/Ride-Sage/app/src/main/res/menu/popup_menu.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/aprabh29/AndroidStudioProjects/RideSage/app/src/main/res/drawable/spinner_background.xml" value="0.1" />
         <entry key="..\:/Users/aprabh29/AndroidStudioProjects/RideSage/app/src/main/res/layout/activity_booking_complete.xml" value="0.22" />

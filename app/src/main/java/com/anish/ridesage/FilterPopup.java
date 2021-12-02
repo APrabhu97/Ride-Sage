@@ -32,22 +32,22 @@ public class FilterPopup {
     Map<String, String> filters;
 
     Button buttonReset;
-    String filterPlatformValue = "";
-    String filterSeatValue = "";
-    String filterTierValue = "";
+    String filterPlatformValue = "None";
+    String filterSeatValue = "None";
+    String filterTierValue = "None";
 
 
     // setPlatformSpinnerData
     Spinner dynamicPlatformSpinner;
-    String[] platforms = new String[]{"", "Uber", "Lyft"};
+    String[] platforms = new String[]{"None", "Uber", "Lyft"};
 
     // setSeatSpinnerData
     Spinner dynamicSeatSpinner;
-    String[] seats = new String[]{"", "3", "5"};
+    String[] seats = new String[]{"None", "3", "5"};
 
     // setTierSpinnerData
     Spinner dynamicTierSpinner;
-    String[] tiers = new String[]{"", "Economy", "Premium"};
+    String[] tiers = new String[]{"None", "Economy", "Premium"};
 
     public FilterPopup(RecyclerView rv, CabItemClickListener listener, List<CabItem> cabListings,
                        Map<String, String> filters) {
@@ -94,7 +94,7 @@ public class FilterPopup {
         setTierSpinnerData(popupView);
     }
 
-    private void setMapData() {  // 2nd to last step step after resetting: Call this method (filterPlatformValue = "", etc.)
+    private void setMapData() {  // 2nd to last step step after resetting: Call this method (filterPlatformValue = "None", etc.)
         this.filters.put("platform", filterPlatformValue);
         this.filters.put("seats", filterSeatValue);
         this.filters.put("tier", filterTierValue);
@@ -103,19 +103,20 @@ public class FilterPopup {
     private void setPlatformSpinnerData(View view) {
         dynamicPlatformSpinner = (Spinner) view.findViewById(R.id.platformSelect);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                android.R.layout.simple_spinner_dropdown_item, platforms) {
+                R.layout.spinner_dropdown_items, platforms) {
             @Override
             public View getDropDownView(int position, View convertView,
                                         ViewGroup parent) {
                 View view = super.getDropDownView(position, convertView, parent);
                 TextView tv = (TextView) view;
 
-                // Set the Text color
+                // Set the font color of dropdown menu
                 tv.setTextColor(Color.BLACK);
 
                 return view;
             }
         };
+
         dynamicPlatformSpinner.setAdapter(adapter);
         dynamicPlatformSpinner.setSelection(Arrays.asList(platforms).indexOf(filterPlatformValue));  // 1. For reset, set index to 0 (empty string)
         dynamicPlatformSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -137,17 +138,17 @@ public class FilterPopup {
 
     private List<CabItem> getFilteredData(){
         List<CabItem> items = cabListings;
-        if(filterPlatformValue != ""){  // 2. Make sure all of these are empty
+        if(filterPlatformValue != "None"){  // 2. Make sure all of these are empty
             items = items.stream()
                     .filter(cabItem -> cabItem.getProvider() == filterPlatformValue)
                     .collect(Collectors.toList());
         }
-        if(filterSeatValue != ""){
+        if(filterSeatValue != "None"){
             items = items.stream()
                     .filter(cabItem -> cabItem.getMaxSeats() == parseInt(filterSeatValue))
                     .collect(Collectors.toList());
         }
-        if(filterTierValue != ""){
+        if(filterTierValue != "None"){
             items = items.stream()
                     .filter(cabItem -> cabItem.getCabTier() == filterTierValue)
                     .collect(Collectors.toList());
@@ -159,7 +160,19 @@ public class FilterPopup {
     private void setSeatSpinnerData(View view) {
         dynamicSeatSpinner = (Spinner) view.findViewById(R.id.seatSelect);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                R.layout.item, seats);
+                R.layout.spinner_dropdown_items, seats) {
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+
+                // Set the font color of dropdown menu
+                tv.setTextColor(Color.BLACK);
+
+                return view;
+            }
+        };
         dynamicSeatSpinner.setAdapter(adapter);
         dynamicSeatSpinner.setSelection(Arrays.asList(seats).indexOf(filterSeatValue));
         dynamicSeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -182,7 +195,19 @@ public class FilterPopup {
     private void setTierSpinnerData(View view) {
         dynamicTierSpinner = (Spinner) view.findViewById(R.id.tierSelect);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                R.layout.item, tiers);
+                R.layout.spinner_dropdown_items, tiers) {
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+
+                // Set the font color of dropdown menu
+                tv.setTextColor(Color.BLACK);
+
+                return view;
+            }
+        };
         dynamicTierSpinner.setAdapter(adapter);
         dynamicTierSpinner.setSelection(Arrays.asList(tiers).indexOf(filterTierValue));
         dynamicTierSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -215,13 +240,13 @@ public class FilterPopup {
     public void onClickResetButton() {
         System.out.println("Worked");
 
-        dynamicPlatformSpinner.setSelection(Arrays.asList(platforms).indexOf(""));
-        dynamicSeatSpinner.setSelection(Arrays.asList(seats).indexOf(""));
-        dynamicTierSpinner.setSelection(Arrays.asList(tiers).indexOf(""));
+        dynamicPlatformSpinner.setSelection(Arrays.asList(platforms).indexOf("None"));
+        dynamicSeatSpinner.setSelection(Arrays.asList(seats).indexOf("None"));
+        dynamicTierSpinner.setSelection(Arrays.asList(tiers).indexOf("None"));
 
-        filterPlatformValue = "";
-        filterSeatValue = "";
-        filterTierValue = "";
+        filterPlatformValue = "None";
+        filterSeatValue = "None";
+        filterTierValue = "None";
 
         CabAdapter adapter = new CabAdapter(getFilteredData(), listener);  // LAST STEP: Call these 3 lines below
         setMapData();
