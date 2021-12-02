@@ -54,9 +54,9 @@ public class CabListings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cab_listings);
 
-        filters.put("platform", "");
-        filters.put("seats", "");
-        filters.put("tier", "");
+        filters.put("platform", "None");
+        filters.put("seats", "None");
+        filters.put("tier", "None");
 
         // Assign view elements
         recyclerView = findViewById(R.id.recycler_view);
@@ -97,6 +97,12 @@ public class CabListings extends AppCompatActivity {
         list.add(new CabItem("Lyft", getPrice("Premium", "Lyft"), 6, "Premium", 3, R.drawable.lyft));
         list.add(new CabItem("Uber", getPrice("Economy", "Uber"), 9, "Economy", 3, R.drawable.uber));
         list.add(new CabItem("Uber", getPrice("Premium", "Uber"), 10, "Premium", 5, R.drawable.uber));
+
+        // Default sort is cheapest price
+        list.sort((cabItem1, cabItem2) ->
+                cabItem1.getCost() > cabItem2.getCost()? 1:-1
+        );
+
         return list;
     }
 
@@ -177,13 +183,7 @@ public class CabListings extends AppCompatActivity {
     }
 
     public void onFilterClicked(View v){
-        Button buttonReset = (Button)findViewById(R.id.buttonReset);
-
-
-
         FilterPopup filterPopup = new FilterPopup(recyclerView, listener, cabListings, filters);
-
-        // buttonReset.setOnClickListener(view -> filterPopup.onClickResetButton());
 
         filterPopup.showPopupWindow(v);
     }
