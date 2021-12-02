@@ -3,8 +3,6 @@ package com.anish.ridesage;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -45,10 +43,8 @@ public class CabListings extends AppCompatActivity {
         myIntent.putExtra("cost", cabItem.getCost());
         myIntent.putExtra("source", sourcePlace);
         myIntent.putExtra("destination", destinationPlace);
-
         myIntent.putExtra("cabItem", cabItem);
-
-
+        myIntent.putExtra("ti", cabItem.getPickupTime());
 
         startActivity(myIntent);
     };
@@ -245,7 +241,6 @@ public class CabListings extends AppCompatActivity {
             default:
                 price = 20;
         }
-        Log.i("Pricer", price + "");
         return price;
     }
 }

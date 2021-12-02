@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
@@ -34,12 +35,14 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        DecimalFormat df = new DecimalFormat("#0.00");
         //setting the movie data in the individual view holder
         CabItem m = cabList.get(position);
         holder.cabType.setText(m.getCabTier());
         holder.maxSeats.setText(m.getMaxSeats().toString());
         holder.pickupTime.setText(m.getPickupTime()+" min");
-        holder.price.setText("$"+m.getCost());
+        holder.price.setText("$"+df.format(m.getCost()));
+        //holder.price.setText("$"+m.getCost());
         holder.cabIcon.setImageResource(m.getIconId());
         holder.cabItem = m;
     }
