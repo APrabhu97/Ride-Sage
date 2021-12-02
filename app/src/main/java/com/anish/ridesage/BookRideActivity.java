@@ -47,6 +47,10 @@ public class BookRideActivity extends AppCompatActivity implements PointsParser.
     private Polyline currentPolyline;
 
 
+    private int time = 0;
+    private CabItem cabItem;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,10 @@ public class BookRideActivity extends AppCompatActivity implements PointsParser.
         source = findViewById(R.id.bookSource);
         destination = findViewById(R.id.bookDestination);
         Intent i = getIntent();
+        cabItem = i.getParcelableExtra("cabItem");
+        time = cabItem.getPickupTime();
+
+
         sourcePlace = i.getParcelableExtra("source");
         destinationPlace = i.getParcelableExtra("destination");
         source.setText(sourcePlace.getName());
@@ -74,6 +82,16 @@ public class BookRideActivity extends AppCompatActivity implements PointsParser.
         });
     }
 
+
+    @Override
+    public void onBackPressed() {
+        Intent myIntent = new Intent(this, CabListings.class);
+        myIntent.putExtra("source", sourcePlace);
+        myIntent.putExtra("destination", destinationPlace);
+        startActivity(myIntent);
+    }
+
+
     @SuppressLint("MissingPermission")
     private void updateLocationUI() {
         try {
@@ -86,7 +104,10 @@ public class BookRideActivity extends AppCompatActivity implements PointsParser.
 
     public void onButtonClicked(View v){
         Intent myIntent = new Intent(this, BookingCompleteActivity.class);
+        myIntent.putExtra("time", Integer.toString(time));
+
         startActivity(myIntent);
+
     }
 
     private void setRoute(){

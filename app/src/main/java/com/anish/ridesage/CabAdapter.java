@@ -49,6 +49,10 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
         return cabList.size();
     }
 
+    public List<CabItem> getCabList() {
+        return cabList;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView cabType;
         public TextView maxSeats;
@@ -74,6 +78,7 @@ public class CabAdapter extends RecyclerView.Adapter<CabAdapter.ViewHolder> {
         @Override
         public void onClick(View v) {
             //opening the trailer of the movie on click of movie item
+            v.setBackgroundColor(-7829368);
             listener.onClick(cabItem);
         }
     }
